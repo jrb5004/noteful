@@ -4,7 +4,10 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder';
+import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
+import ApiError from '../ApiError';
 import config from '../config';
 import './App.css';
 
@@ -41,6 +44,20 @@ class App extends Component {
         });
     };
 
+    addNote = newNote => {
+        console.log(newNote)
+        console.log(this.state.notes)
+        this.setState({
+            notes: this.state.notes.push(newNote)
+        })
+    }
+
+    /*addFolder = newFolder => {
+        this.setState({
+            notes: 
+        })
+    }*/
+
     renderNavRoutes() {
         return (
             <>
@@ -71,6 +88,8 @@ class App extends Component {
                     />
                 ))}
                 <Route path="/note/:noteId" component={NotePageMain} />
+                <Route path="/add-folder" component={AddFolder} />
+                <Route path="/add-note" component={AddNote} />
             </>
         );
     }
@@ -79,18 +98,24 @@ class App extends Component {
         const value = {
             notes: this.state.notes,
             folders: this.state.folders,
-            deleteNote: this.handleDeleteNote
+            deleteNote: this.handleDeleteNote, 
+            addNote: this.addNote,
+            addFolder: this.addFolder,
         };
         return (
             <ApiContext.Provider value={value}>
                 <div className="App">
-                    <nav className="App__nav">{this.renderNavRoutes()}</nav>
+                    <ApiError>
+                        <nav className="App__nav">{this.renderNavRoutes()}</nav>
+                    </ApiError>
                     <header className="App__header">
                         <h1>
                             <Link to="/">Noteful</Link>{' '}
                         </h1>
                     </header>
-                    <main className="App__main">{this.renderMainRoutes()}</main>
+                    <ApiError>
+                        <main className="App__main">{this.renderMainRoutes()}</main>
+                    </ApiError>
                 </div>
             </ApiContext.Provider>
         );

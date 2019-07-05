@@ -2,6 +2,7 @@ import React from 'react'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
 import { findNote, findFolder } from '../notes-helpers'
+import PropTypes from 'prop-types'
 import './NotePageNav.css'
 
 export default class NotePageNav extends React.Component {
@@ -39,4 +40,18 @@ export default class NotePageNav extends React.Component {
       </div>
     )
   }
+}
+
+NotePageNav.propTypes = {
+  Notes: PropTypes.arrayOf(PropTypes.shape({
+    content: PropTypes.string.isRequired,
+    folderId: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    modified: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  })),
+  Folders: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }))
 }
