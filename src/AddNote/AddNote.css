@@ -1,0 +1,45 @@
+.addNoteForm {
+    color: #b5b3b3;
+    padding-left: 5%;
+}
+
+.AddNote__form-title {
+    text-align: center;
+}
+
+.AddNote__form-label {
+    font-weight: bold;
+}
+
+.formItem {
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.formItem div {
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.formItem:hover {
+    cursor: pointer;
+}
+
+.contentInput {
+    width: 70%;
+}
+
+.AddNote__submit-button {
+    background-color: #b5b3b3;
+    color: black;
+    font-weight: bold;
+}
+
+.AddNote__button-group {
+    text-align: center;
+}
+
+
+

@@ -1,21 +1,49 @@
 import React, {Component} from 'react';
 import ApiContext from '../ApiContext';
 import config from '../config'
+import './AddFolder.css'
 
 class AddFolder extends Component {
   static defaultProps ={
     addFolder: () => {},
   }
+
   static contextType = ApiContext;
+
+  constructor() {
+    super();
+    this.state = {
+        folderName: '',
+    }
+    this.handleFolder = this.handleFolder.bind(this)
+}
+
+  setFolderName(event) {
+    this.setState({
+      folderName:event.target.value
+    })
+  }
 
   handleFolder = e => {
     e.preventDefault()
+
+    let folderId = this.state.folderName
+
+    if (!this.state.folderName || this.state.folderName.trim() == '') { 
+      alert('name is required') 
+      return 
+    }
+    
+    let body = {
+      name: this.state.folderName,
+    }
 
     fetch(`${config.API_ENDPOINT}/folders`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
       },
+      body: JSON.stringify(body)
     })
       .then(res => {
         if (!res.ok)
@@ -23,8 +51,8 @@ class AddFolder extends Component {
         return res.json()
       })
       .then(() => {
-        //this.context.addFolder(folderId)
-        //this.props.addFolder(folderId)
+        this.context.addFolder(folderId)
+        this.props.addFolder(folderId)
       })
       .catch(error => {
         console.error({ error })
@@ -33,19 +61,16 @@ class AddFolder extends Component {
 
   render () {
     return (
-     <form className="addFolderForm" onSubmit={this.handleAddFolder}>
+     <form className="addFolderForm" onSubmit={this.handleFolder}>
        <h2>Add Folder</h2>
        <div className="form">
-         <label htmlFor="name">New Folder Name</label>
+         <label htmlFor="name">New Folder Name: </label>
          <input type="text" className="newFolderInput"
-           name="name" id="name" required/>
+           name="name" id="name" onChange={(e) => this.setFolderName(e)} required/>
        </div>
 
-       <div className="buttonGroup">
-        <button type="reset" className="cancelButton">
-            Cancel
-        </button>
-        <button type="submit" className="submitButton">
+       <div className="AddFolder__button-group">
+        <button type="submit" className="AddFolder__submit-button">
             Submit
         </button>
        </div>

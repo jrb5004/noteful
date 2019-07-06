@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ApiContext from '../ApiContext';
-import config from '../config'
+import config from '../config';
+import './AddNote.css';
 
 
 class AddNote extends Component {
@@ -43,13 +44,11 @@ class AddNote extends Component {
   })
 }
 
-  componentDidMount() {
-    console.log(this.context)
-  }
 
   handleAddNote = e => {
     e.preventDefault()
     console.log (this.state)
+
 
     let noteId = this.state.noteName
 
@@ -91,26 +90,29 @@ class AddNote extends Component {
   render () {
     return (
      <form className="addNoteForm" onSubmit={this.handleAddNote}>
-       <h2>Add Note</h2>
-       <div className="form">
-         <label htmlFor="name">Note Name: </label>
-         <input type="text"
-           name="name" id="name" onChange={(e) => this.setNoteName(e)} required/>
-         <label htmlFor="name">Note Content: </label>
-         <input type="text"
-           name="content" id="content" onChange={(e) => this.setContent(e)} required/>
-         <label htmlFor="name">Folder: </label>
-         {this.context.folders.map(folder => {
-           return <div style={{ border: this.isActive(folder) }} onClick={() => this.updateFolder(folder)} id={folder.id} key={folder.id}><p>{folder.name}</p></div>
-          })
-         }
+       <h2 className="AddNote__form-title">Add Note</h2>
+       <div className="AddNote__form">
+         <div className="formItem">
+          <label htmlFor="name" className="AddNote__form-label">Note Name: </label>
+          <input type="text"
+            name="name" id="name" onChange={(e) => this.setNoteName(e)} required/>
+         </div>
+         <div className="formItem">
+          <label htmlFor="name" className="AddNote__form-label">Note Content: </label>
+          <input type="text"
+            name="content" id="content" className="contentInput" onChange={(e) => this.setContent(e)} required/>
+        </div>
+        <div className="formItem">
+          <label htmlFor="name" className="AddNote__form-label">Folder (select one): </label>
+          {this.context.folders.map(folder => {
+            return <div style={{ border: this.isActive(folder) }} onClick={() => this.updateFolder(folder)} id={folder.id} key={folder.id}><p>{folder.name}</p></div>
+            })
+          }
+        </div>
        </div>
 
-       <div className="buttonGroup">
-        <button type="reset" className="cancelButton">
-            Cancel
-        </button>
-        <button type="submit" className="submitButton">
+       <div className="AddNote__button-group">
+        <button type="submit" className="AddNote__submit-button">
             Submit
         </button>
        </div>

@@ -41,22 +41,28 @@ class App extends Component {
     handleDeleteNote = noteId => {
         this.setState({
             notes: this.state.notes.filter(note => note.id !== noteId)
-        });
-    };
+        })
+    }
 
     addNote = newNote => {
         console.log(newNote)
         console.log(this.state.notes)
         this.setState({
-            notes: this.state.notes.push(newNote)
-        })
-    }
+            notes: this.state.notes.concat(newNote)
+        }/*, () => {
+            this.props.history.push('/NoteListMain')
+        })*/
+    )}
 
-    /*addFolder = newFolder => {
+    addFolder = newFolder => {
+        console.log('newFolder')
+        console.log(this.state.folders)
         this.setState({
-            notes: 
-        })
-    }*/
+            notes: this.state.folders.concat(newFolder)
+        }/*, () => {
+            this.props.history.push('/NoteListMain')
+        })*/
+    )}
 
     renderNavRoutes() {
         return (
@@ -120,6 +126,7 @@ class App extends Component {
             </ApiContext.Provider>
         );
     }
+
 }
 
 export default App;

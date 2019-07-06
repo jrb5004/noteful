@@ -39,9 +39,8 @@ handleButtonClick() {
             className='NoteListNav__add-folder-button'
             onClick={() => this.handleButtonClick()}
           >
-            <br />
             
-            Folder
+            Add Folder
           </CircleButton>
         </div>
       </div>

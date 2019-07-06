@@ -1,0 +1,16 @@
+.addFolderForm {
+    color: #b5b3b3;
+    padding-left: 5%;
+    text-align: center;
+}
+
+.AddFolder__submit-button {
+    margin-top: 5%;
+    background-color: #b5b3b3;
+    color: black;
+    font-weight: bold;
+}
+
+.AddFolder__button-group {
+    text-align: center;
+}
