@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from "react-router-dom"
 import ApiContext from '../ApiContext';
 import config from '../config'
 import './AddFolder.css'
@@ -53,6 +54,8 @@ class AddFolder extends Component {
       .then(() => {
         this.context.addFolder(folderId)
         this.props.addFolder(folderId)
+        this.props.history.push("/")
+        window.location.reload();
       })
       .catch(error => {
         console.error({ error })
@@ -79,5 +82,5 @@ class AddFolder extends Component {
  }
 }
 
-export default AddFolder;
+export default withRouter(AddFolder);
 

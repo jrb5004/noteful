@@ -46,12 +46,11 @@ class App extends Component {
 
     addNote = newNote => {
         console.log(newNote)
+        const _this = this
         console.log(this.state.notes)
         this.setState({
             notes: this.state.notes.concat(newNote)
-        }/*, () => {
-            this.props.history.push('/NoteListMain')
-        })*/
+        }, 
     )}
 
     addFolder = newFolder => {
@@ -59,9 +58,7 @@ class App extends Component {
         console.log(this.state.folders)
         this.setState({
             notes: this.state.folders.concat(newFolder)
-        }/*, () => {
-            this.props.history.push('/NoteListMain')
-        })*/
+        }
     )}
 
     renderNavRoutes() {

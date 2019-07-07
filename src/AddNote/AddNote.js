@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { withRouter } from "react-router-dom"
 import ApiContext from '../ApiContext';
 import config from '../config';
 import './AddNote.css';
@@ -81,6 +82,8 @@ class AddNote extends Component {
       .then(() => {
         this.context.addNote(noteId)
         this.props.addNote(noteId)
+        this.props.history.push("/")
+        window.location.reload();
       })
       .catch(error => {
         console.error({ error })
@@ -121,4 +124,4 @@ class AddNote extends Component {
  }
 }
  
-export default AddNote;
+export default withRouter(AddNote);
