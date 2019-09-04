@@ -12,12 +12,13 @@
   .NoteListNav__add-folder-button {
     margin: 20px auto;
   }
+
   .NoteListNav__add-folder-button:hover {
     background-color: #29862e;
     color: white;
   }
   
-  .NoteListNav__folder-link {
+  .NoteListNav_folders {
     background-color: #030f1f;
     color: #b5b3b3;
     display: block;
@@ -28,6 +29,16 @@
     padding: 8px 16px;
     text-decoration: none;
   }
+
+  .NoteListNav_folders a {
+    background-color: #030f1f;
+    color: #b5b3b3;
+    display: block;
+    font-family: var(--custom-font);
+    font-size: 20px;
+    text-decoration: none;
+  }
+
   .NoteListNav__folder-link:hover {
     color: #FFB72F;
     cursor: pointer;
@@ -42,3 +53,19 @@
     float: right;
     font-size: 10px;
   }
+
+  .Folder__delete {
+    background-color: #041a3a;
+    border: 0;
+    color: #bdbcbc;
+    width: 40%;
+    font-size: 15px
+}
+
+  .Folder__delete:hover {
+    background-color: #bd0909;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+  }
+

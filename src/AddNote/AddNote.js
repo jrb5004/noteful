@@ -50,7 +50,6 @@ class AddNote extends Component {
     e.preventDefault()
     console.log (this.state)
 
-
     let noteId = this.state.noteName
 
     if (!this.state.noteName || this.state.noteName.trim() == '') { 
@@ -60,13 +59,13 @@ class AddNote extends Component {
 
     let body = {
       name: this.state.noteName,
-        folderId: this.state.activeFolder.id,
-        content: this.state.content
+      folder_id: this.state.activeFolder.id,
+      content: this.state.content
     }
 
     console.log(body)
 
-    fetch(`${config.API_ENDPOINT}/notes`, {
+    fetch(`${config.API_ENDPOINT}/api/notes`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -79,11 +78,10 @@ class AddNote extends Component {
           return res.json().then(e => Promise.reject(e))
         return res.json()
       })
-      .then(() => {
-        this.context.addNote(noteId)
-        this.props.addNote(noteId)
+      .then((note) => {
+        this.context.addNote(note)
+        this.props.addNote(note)
         this.props.history.push("/")
-        window.location.reload();
       })
       .catch(error => {
         console.error({ error })

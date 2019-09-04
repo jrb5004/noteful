@@ -6,6 +6,7 @@ import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
+import UpdateNote from '../UpdateNote/UpdateNote';
 import ApiContext from '../ApiContext';
 import ApiError from '../ApiError';
 import config from '../config';
@@ -19,8 +20,8 @@ class App extends Component {
 
     componentDidMount() {
         Promise.all([
-            fetch(`${config.API_ENDPOINT}/notes`),
-            fetch(`${config.API_ENDPOINT}/folders`)
+            fetch(`${config.API_ENDPOINT}/api/notes`),
+            fetch(`${config.API_ENDPOINT}/api/folders`)
         ])
             .then(([notesRes, foldersRes]) => {
                 if (!notesRes.ok)
@@ -36,6 +37,12 @@ class App extends Component {
             .catch(error => {
                 console.error({error});
             });
+    }
+
+    handleDeleteFolder = folderId => {
+        this.setState({
+            folders: this.state.folders.filter(folder => folder.id !== folderId)
+        })
     }
 
     handleDeleteNote = noteId => {
@@ -61,6 +68,23 @@ class App extends Component {
         }
     )}
 
+    updateNote = updatedNote => {
+        const newNotes = this.state.notes.map(note =>
+            (note.id === updatedNote.id)
+                ? updatedNote
+                : note
+        )
+        this.setState({
+            notes: newNotes
+        })
+    };
+
+    filterNotes = folderId => {
+        this.setState({
+            notes: this.state.notes.filter(note => note.folder_id !== folderId)
+        })
+    }
+
     renderNavRoutes() {
         return (
             <>
@@ -75,6 +99,7 @@ class App extends Component {
                 <Route path="/note/:noteId" component={NotePageNav} />
                 <Route path="/add-folder" component={NotePageNav} />
                 <Route path="/add-note" component={NotePageNav} />
+                <Route path="/edit/:noteId" component={NotePageNav} />
             </>
         );
     }
@@ -93,6 +118,7 @@ class App extends Component {
                 <Route path="/note/:noteId" component={NotePageMain} />
                 <Route path="/add-folder" component={AddFolder} />
                 <Route path="/add-note" component={AddNote} />
+                <Route path="/edit/:noteId" component={UpdateNote} />
             </>
         );
     }
@@ -102,8 +128,11 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.handleDeleteNote, 
+            deleteFolder: this.handleDeleteFolder,
             addNote: this.addNote,
             addFolder: this.addFolder,
+            updateNote: this.updateNote,
+            filterNotes: this.filterNotes,
         };
         return (
             <ApiContext.Provider value={value}>

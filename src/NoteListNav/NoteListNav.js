@@ -2,15 +2,40 @@ import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
-import { countNotesForFolder } from '../notes-helpers'
+import { countNotesForFolder, findFolder } from '../notes-helpers'
 import PropTypes from 'prop-types'
+import config from '../config'
 import './NoteListNav.css'
 
 export default class NoteListNav extends React.Component {
   static contextType = ApiContext;
 
-handleButtonClick() {
-}
+  handleButtonClick() {
+  }
+
+  handleClickDelete = (folderId) => {
+
+    console.log(folderId)
+
+    fetch(`${config.API_ENDPOINT}/api/folders/${folderId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+      .then(res => {
+        if (!res.ok)
+          return Promise.reject('error deleting folder')
+        return 
+      })
+      .then(() => {
+        this.context.deleteFolder(folderId)
+        this.context.filterNotes(folderId)
+      })
+      .catch(error => {
+        console.error({ error })
+      })
+  }
 
   render() {
     const { folders=[], notes=[] } = this.context
@@ -18,7 +43,7 @@ handleButtonClick() {
       <div className='NoteListNav'>
         <ul className='NoteListNav__list'>
           {folders.map(folder =>
-            <li key={folder.id}>
+            <li className='NoteListNav_folders' key={folder.id}>
               <NavLink
                 className='NoteListNav__folder-link'
                 to={`/folder/${folder.id}`}
@@ -28,6 +53,14 @@ handleButtonClick() {
                 </span>
                 {folder.name}
               </NavLink>
+                <button
+                className='Folder__delete'
+                type='button'
+                onClick={() => this.handleClickDelete(folder.id)}
+              >
+                {' '}
+                remove
+              </button>
             </li>
           )}
         </ul>

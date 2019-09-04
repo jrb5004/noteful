@@ -15,7 +15,7 @@ export default class Note extends React.Component {
     e.preventDefault()
     const noteId = this.props.id
 
-    fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json'
@@ -23,12 +23,11 @@ export default class Note extends React.Component {
     })
       .then(res => {
         if (!res.ok)
-          return res.json().then(e => Promise.reject(e))
-        return res.json()
+          return Promise.reject('error deleting note')
+        return 
       })
       .then(() => {
         this.context.deleteNote(noteId)
-        this.props.deleteNote(noteId)
       })
       .catch(error => {
         console.error({ error })
@@ -37,6 +36,7 @@ export default class Note extends React.Component {
 
   render() {
     const { name, id, modified } = this.props
+    console.log(id)
     return (
       <div className='Note'>
         <h2 className='Note__title'>

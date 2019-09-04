@@ -4,6 +4,8 @@ import ApiContext from '../ApiContext'
 import { findNote } from '../notes-helpers'
 import PropTypes from 'prop-types'
 import './NotePageMain.css'
+import CircleButton from '../CircleButton/CircleButton'
+import { Link } from 'react-router-dom'
 
 export default class NotePageMain extends React.Component {
   static defaultProps = {
@@ -20,6 +22,7 @@ export default class NotePageMain extends React.Component {
   render() {
     const { notes=[] } = this.context
     const { noteId } = this.props.match.params
+    console.log(noteId)
     const note = findNote(notes, noteId) || { content: '' }
     return (
       <section className='NotePageMain'>
@@ -33,6 +36,16 @@ export default class NotePageMain extends React.Component {
           {note.content.split(/\n \r|\n/).map((para, i) =>
             <p key={i}>{para}</p>
           )}
+        </div>
+        <div className='NoteListMain__button-container'>
+          <CircleButton
+            tag={Link}
+            to={`/edit/${note.id}`}
+            type='button'
+            className='NoteListMain__edit-note-button'
+          >
+            Edit Note
+          </CircleButton>
         </div>
       </section>
     )
