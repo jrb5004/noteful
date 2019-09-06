@@ -18,8 +18,9 @@ export default class Note extends React.Component {
     fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       method: 'DELETE',
       headers: {
-        'content-type': 'application/json'
-      },
+        'content-type': 'application/json',
+        'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+      }
     })
       .then(res => {
         if (!res.ok)

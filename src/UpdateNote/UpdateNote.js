@@ -27,7 +27,10 @@ class UpdateNote extends Component {
 
   componentDidMount() {
     const { noteId } = this.props.match.params
-    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`)
+    fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {headers: {
+      'content-type': 'application/json',
+      'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+    }})
     .then((notesRes) => {
         if (!notesRes.ok)
             return notesRes.json().then(e => Promise.reject(e));
@@ -89,7 +92,10 @@ class UpdateNote extends Component {
 
 
     fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+      },
       method: 'PATCH',
       body: JSON.stringify(body)
     })

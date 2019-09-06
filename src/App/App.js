@@ -20,8 +20,14 @@ class App extends Component {
 
     componentDidMount() {
         Promise.all([
-            fetch(`${config.API_ENDPOINT}/api/notes`),
-            fetch(`${config.API_ENDPOINT}/api/folders`)
+            fetch(`${config.API_ENDPOINT}/api/notes`, {headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+              }}),
+            fetch(`${config.API_ENDPOINT}/api/folders`, {headers: {
+                'content-type': 'application/json',
+                'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+              }})
         ])
             .then(([notesRes, foldersRes]) => {
                 if (!notesRes.ok)
