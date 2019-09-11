@@ -69,7 +69,7 @@ class AddNote extends Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+        'Authorization': config.API_KEY
       },
       body: JSON.stringify(body)
     })

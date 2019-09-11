@@ -29,7 +29,7 @@ class UpdateNote extends Component {
     const { noteId } = this.props.match.params
     fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {headers: {
       'content-type': 'application/json',
-      'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+      'Authorization': config.API_KEY
     }})
     .then((notesRes) => {
         if (!notesRes.ok)
@@ -94,7 +94,7 @@ class UpdateNote extends Component {
     fetch(`${config.API_ENDPOINT}/api/notes/${noteId}`, {
       headers: {
         'content-type': 'application/json',
-        'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+        'Authorization': config.API_KEY
       },
       method: 'PATCH',
       body: JSON.stringify(body)

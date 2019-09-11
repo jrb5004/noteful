@@ -1,5 +1,6 @@
 {
     "version": 2,
+    "alias": "jrb5004-noteful-app",
     "name": "noteful-app",
     "routes": [
         {

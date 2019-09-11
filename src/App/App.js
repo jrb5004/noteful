@@ -22,11 +22,11 @@ class App extends Component {
         Promise.all([
             fetch(`${config.API_ENDPOINT}/api/notes`, {headers: {
                 'content-type': 'application/json',
-                'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+                'Authorization': config.API_KEY
               }}),
             fetch(`${config.API_ENDPOINT}/api/folders`, {headers: {
                 'content-type': 'application/json',
-                'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+                'Authorization': config.API_KEY
               }})
         ])
             .then(([notesRes, foldersRes]) => {

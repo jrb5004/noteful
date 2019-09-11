@@ -21,7 +21,7 @@ export default class NoteListNav extends React.Component {
       method: 'DELETE',
       headers: {
         'content-type': 'application/json',
-        'Authorization': 'Bearer 0f2eab6e-d0c4-11e9-bb65-2a2ae2dbcce4'
+        'Authorization': config.API_KEY
       },
     })
       .then(res => {
