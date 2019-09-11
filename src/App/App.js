@@ -19,14 +19,15 @@ class App extends Component {
     };
 
     componentDidMount() {
+        console.log(config.API_KEY)
         Promise.all([
             fetch(`${config.API_ENDPOINT}/api/notes`, {headers: {
                 'content-type': 'application/json',
-                'Authorization': config.API_KEY
+                'Authorization': `Bearer ${config.API_KEY}`
               }}),
             fetch(`${config.API_ENDPOINT}/api/folders`, {headers: {
                 'content-type': 'application/json',
-                'Authorization': config.API_KEY
+                'Authorization': `Bearer ${config.API_KEY}`
               }})
         ])
             .then(([notesRes, foldersRes]) => {

@@ -43,7 +43,7 @@ class AddFolder extends Component {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'Authorization': config.API_KEY
+        'Authorization': `Bearer ${config.API_KEY}`
       },
       body: JSON.stringify(body)
     })
